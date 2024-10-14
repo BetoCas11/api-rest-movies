@@ -1,0 +1,19 @@
+{
+  "name": "api-rest-movies",
+  "version": "1.0.0",
+  "description": "Un ejemplo práctico al usar peticiones asíncronas a una API y usar sus respuestas en una web",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BetoCas11/api-rest-movies.git"
+  },
+  "author": "JoseA",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BetoCas11/api-rest-movies/issues"
+  },
+  "homepage": "https://github.com/BetoCas11/api-rest-movies#readme"
+}

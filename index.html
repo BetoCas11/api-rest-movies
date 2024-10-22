@@ -7,7 +7,72 @@
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 <body>
-    <h1>Bienvenido a la cartelera</h1>
+    <header class="header-nav">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#">Cine-Logo</a></li>
+                <li class="nav__item"><a href="#">Películas</a></li>
+                <li class="nav__item"><a href="#">Tv Shows</a></li>
+            </ul>
+            <form action="" class="form">
+                <label for="search">
+                    <input type="search" id="search" class="form__search" placeholder="Busca tus gustos preferidos y disfruta">
+                    Búsqueda
+                </label>
+            </form>
+            <div class="account">
+                <img src="" alt="img de la cuenta">
+            </div>
+        </nav>
+    </header>
+    <div class="grid">
+        <section class="section-aside">
+            <article class="section__article">
+                <h2 class="section__tittle">Nuevos Trailers</h2>
+                <div class="section__itemsnews">
+                    <img src="" alt="Trailers Nuevos">
+                    <button></button>
+                    <p></p>
+                    <p></p>
+                    <span></span>
+                </div>
+                <div class="section__itemsnews">
+                    <img src="" alt="Trailers Nuevos">
+                    <button></button>
+                    <p></p>
+                    <p></p>
+                    <span></span>
+                </div>
+            </article>
+            <aside>
+                <h2 class="aside__title">Géneros Favoritos</h2>
+                <ul class="aside__list">
+                    <li class="aside__items">Acción</li>
+                    <li class="aside__items">Comedia</li>
+                    <li class="aside__items">Misterio</li>
+                    <li class="aside__items">Terror</li>
+                    <li class="aside__items">Drama</li>
+                    <li class="aside__items">Ciencia Ficción</li>
+                </ul>
+            </aside>
+        </section>
+        <section class="section-main">
+            <main>
+                <header class="main__header">
+                    <h1 class="main__title">¡Bienvenido a la plataforma!, disfruta de millones de películas, series y más</h1>
+                    <img  class="main__img" src="" alt="último en tendencia">
+                    <button class="main__button">Ver el trailer</button>
+                </header>
+                <article class="main__article">
+                    <h2>Películas Populares del momento</h2>
+                    <div>
+                        <movie-card></movie-card>  
+                    </div>
+                </article>
+            </main>
+        </section>
+    
+    </div>
     <script src="./src/main.js" type="module"></script>
 </body>
 </html>

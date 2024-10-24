@@ -16,7 +16,8 @@ body{
 
 .header-nav{
     inline-size: 100%;
-    font-size: 18px;
+    font-size: 15px;
+    container: headerNav / inline-size;
     & nav{
         inline-size: 100%;
         block-size: 55px;
@@ -25,6 +26,9 @@ body{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        @container headerNav (width <= 700px){
+            justify-content: space-evenly;
+        }
         & .nav__list{
             display: flex;
             list-style-type: none;
@@ -32,6 +36,11 @@ body{
             padding: 0;
             padding-inline-start: 20px;
             margin: 0;
+            @container headerNav (width <= 700px){
+                & .nav__item:not(:nth-child(1)){
+                    display: none;
+                }
+            }
             & .nav__item{
                 & a{
                     text-decoration: none;
@@ -56,6 +65,9 @@ body{
                 border-radius: 20px;
                 overflow: hidden;
                 transition: transform 400ms ease;
+                @container headerNav (width <= 540px){
+                    inline-size: 200px;
+                }
                 &:hover{
                     outline: 2px solid var(--textnav-color); 
                     transform: scaleX(1.2);
@@ -67,9 +79,11 @@ body{
                     outline: none;
                     border: none;
                     background: none;
+                    color: white;
                     &::placeholder{
                         text-align: center;
                         font-weight: normal;
+                        color: rgb(194, 190, 190)
                     }
                     &:focus label{
                         border: 2px solid var(--textnav-color);
@@ -77,15 +91,25 @@ body{
                 }
             }
         }
+        & .account{
+            & img{
+                border-radius: 50%;
+            }
+        }
     }
 }
 .grid{
+    container: sectionAside / inline-size;
     inline-size: 100%;
     block-size: calc(100vh - 55px);
     display: grid;
     grid-template-columns: 320px 1fr;
     grid-template-rows: 1fr;
     & .section-main{
+        @container sectionAside (width <= 900px){
+            display: block;
+            inline-size: calc(100vw - 15px);
+        }
         & main{
             inline-size: 100%;
             & .main__header{
@@ -125,6 +149,12 @@ body{
                     justify-content: space-around;
                     gap: 30px 10px;
                     margin-block-start: 20px;
+                    padding-inline: 20px;
+                    @container sectionAside (width <= 900px){
+                        padding: 0;
+                        inline-size: 100%;
+                        justify-content: center;
+                    }
                 }
             }
         }
@@ -134,6 +164,9 @@ body{
         border-inline-end: 1px solid var(--graycontorn);
         display: grid;
         grid-template-rows: 1fr 1fr;
+        @container sectionAside (width <= 900px){
+            display: none;
+        }
         & .section__article{
             display: flex;
             flex-direction: column;
@@ -152,11 +185,11 @@ body{
                     object-fit: cover;
                     border-radius: 10px;
                 }
-
             }
         }
         & aside{
             border-block-start: 1.5px solid var(--graycontorn);
+            align-content: center;
             & h2{
                 text-align: center;
                 font-size: 20px;

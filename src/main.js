@@ -45,7 +45,7 @@ class MovieCard extends HTMLElement{
                         block-size: 100%;
                         & h3{
                             color: color-mix(in srgb, var(--textnav-color) 50%, white);
-                            text-shadow: 0 0 9px white;
+                            text-shadow: 0 0 4px white;
                             font-size: 20px;
                         }
                         & p{

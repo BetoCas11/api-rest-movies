@@ -11,8 +11,8 @@
         <nav class="nav">
             <ul class="nav__list">
                 <li class="nav__item"><a href="#" class="uno">Cine-Logo</a></li>
-                <li class="nav__item"><a href="#">Películas</a></li>
-                <li class="nav__item"><a href="#">Tv Shows</a></li>
+                <li class="nav__item"><a href="#peliculas">Películas</a></li>
+                <li class="nav__item"><a href="#tv-shows">Tv Shows</a></li>
             </ul>
             <form action="" class="form">
                 <label for="search">
@@ -61,7 +61,16 @@
                     <button class="main__button">Ver el trailer</button>
                 </header>
                 <article class="main__article">
-                    <h2>Películas Populares del momento</h2>
+                    <h2 id="peliculas"><a href="#peliculas">Películas Populares del momento</a></h2>
+                    <div class="main__movies">
+                        <movie-card></movie-card>
+                        <movie-card></movie-card>  
+                        <movie-card></movie-card>  
+                        <movie-card></movie-card>  
+                        <movie-card></movie-card>   
+                        <movie-card></movie-card>   
+                    </div>
+                    <h2 id="series"><a href="#series">Series del momento</a></h2>
                     <div class="main__movies">
                         <movie-card></movie-card>
                         <movie-card></movie-card>  
@@ -69,11 +78,15 @@
                         <movie-card></movie-card>  
                         <movie-card></movie-card>   
                         <movie-card></movie-card>  
-                        <movie-card></movie-card> 
+                    </div>
+                    <h2 id="tv-shows"><a href="#tv-shows">Tv shows</a></h2>
+                    <div class="main__movies">
+                        <movie-card></movie-card>
                         <movie-card></movie-card>  
-                        <movie-card></movie-card> 
                         <movie-card></movie-card>  
-                        <movie-card></movie-card> 
+                        <movie-card></movie-card>  
+                        <movie-card></movie-card>   
+                        <movie-card></movie-card>  
                     </div>
                 </article>
             </main>

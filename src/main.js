@@ -1,4 +1,5 @@
 import { APIKEY } from "./secret.js";
+import ItemsnewTrailers from "./components/itemsNewsSection.js";
 console.log("Hola " + APIKEY );
 
 class MovieCard extends HTMLElement{
@@ -72,3 +73,4 @@ class MovieCard extends HTMLElement{
 }
 
 customElements.define("movie-card", MovieCard);
+customElements.define('items-new-trailers', ItemsnewTrailers);

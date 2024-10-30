@@ -1,0 +1,68 @@
+<!-- 1- Para tener la misma imagen y título de la card seleccionada (figure) podría escuchar un evento (mediante una delegación) y pasarle a un función como argumentos los títulos e img de la card seleccionada
+2- Veo que en la sección de nuevos trailers pdría hacer uso sel scrool snap y hacer componentes para los items de los trailers
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body class="content-watch">
+    <header class="header-nav">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li class="nav__item"><a href="#" class="uno">Cine-Logo</a></li>
+                <li class="nav__item"><a href="#">Películas</a></li>
+                <li class="nav__item"><a href="#">Tv Shows</a></li>
+            </ul>
+            <form action="" class="form">
+                <label for="search">
+                    <input type="search" id="search" class="form__search" placeholder="Busca tus gustos preferidos y disfruta">
+                    Buscar
+                </label>
+            </form>
+            <div class="account">
+                <img src="https://media.themoviedb.org/t/p/w1920_and_h427_multi_faces/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg" alt="img de la cuenta" width="48px" height="48px">
+            </div>
+        </nav>
+    </header>
+    <main class="main__content-info">
+        <section class="section__infowatch">
+            <article class="article__content-info">
+                <figure>
+                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/8PYqGSd8MOm5ce8io4qNSAiSExW.jpg" alt="Poster película">
+                    <figcaption class="figure__ranking">
+                        <ul>
+                            <li>73%</li>
+                            <li>Ciencia Ficcón</li>
+                            <li>1H 59m</li>
+                        </ul>
+                    </figcaption>
+                </figure>
+                <header>
+                    <h2>Alien: Romulus (2024)</h2>
+                </header>
+                <ul class="article__generosList">
+                    <li>HHH</li>
+                </ul>
+                <div class="article__about-content">
+                    <p class="article__about-content">Mientras exploran en las profundidades de una estación espacial abandonada, un grupo de jóvenes colonizadores del espacio se encuentran cara a cara con la forma de vida más aterradora del universo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, ducimus cumque facilis perspiciatis vel iure molestias assumenda soluta quas ratione!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, cumque in nesciunt deserunt nam consectetur nostrum ex cum placeat adipisci mollitia magni, qui ut deleniti aspernatur magnam similique dignissimos voluptatibus?</p>
+                    <button>Reproducir trailer</button>
+                </div>
+                <div class="article__actors"> Actores de:</div>
+                <aside class="article__about-film">
+                    <h2>Director <span></span></h2>
+                    <h3>Escritores <span></span></h3>
+                </aside>
+            </article>
+        </section>
+    </main>
+    <script src="src/main.js" type="module"></script>
+
+</body>
+
+</html>
+
+<!-- Cuando el contenedor de section tenga 680px de ancho, hacer una nueva grilla el article, donde habrá dos columnas y 6 filas r-->

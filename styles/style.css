@@ -129,6 +129,9 @@ body{
                     &:hover{
                         box-shadow: 0 0 10px white;
                     }
+                    @container sectionAside (width <= 1000px){
+                        inline-size: 95%;
+                    }
                 }
                 & .main__button{
                     position: absolute;
@@ -139,6 +142,7 @@ body{
             }
             & .main__article{
                 block-size: 100%;
+                margin-block-start: 15px;
                 & h2{
                     font-size: 25px;
                     text-align: center;
@@ -171,20 +175,18 @@ body{
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
+            align-items: center;
             & h2{
                 font-size: 20px;
                 text-align: center;
             }
             & .section__itemsnews{
-                inline-size: 100%;
-                & img{
-                    display: block;
-                    margin:  0 auto;
-                    inline-size: 90%;
-                    block-size: 150px;
-                    object-fit: cover;
-                    border-radius: 10px;
-                }
+                inline-size: 310px;
+                display: flex;
+                overflow-x: scroll;
+                gap: 20px;
+                scrollbar-width: thin;
+                scrollbar-color: white var(--lightblack-color);
             }
         }
         & aside{
@@ -212,6 +214,161 @@ body{
                 }
             }
            
+        }
+    }
+}
+
+/*Info-Main*/
+
+.main__content-info{
+    inline-size: 100%;
+    block-size: calc(100vb - 85px);
+    padding-inline: 20px;
+    & .section__infowatch{
+        inline-size: 100%;
+        block-size: calc(100% - 30px);
+        margin-block: 30px;
+        border-radius: 10px;
+        container: section-container/ inline-size;
+        & .article__content-info{
+            inline-size: 100%;
+            block-size: 100%;
+            display: grid;
+            grid-template: 1fr 3fr 1fr / 2fr 1fr .5fr;
+            column-gap: 5px;
+            place-items: center;
+            @container section-container (width >= 850px){
+                grid-template-columns: repeat(2, 1fr) .5fr;
+            }
+            @container section-container (width <= 935px){
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @container section-container (width <= 680px){
+                grid-template-rows: .5fr 3fr repeat(2, 1fr);
+                row-gap: 10px;
+            }
+            & figure{
+                inline-size: 100%;
+                grid-area: 1 / 1 / 4 / 2;
+                block-size: 100%;
+                align-content: center;
+                & img{
+                    inline-size: 450px;
+                    block-size: 650px;
+                    object-fit: fill;
+                    border-radius: 10px;
+                    display: block;
+                    margin: 0 auto;
+                    &:hover{
+                        box-shadow: 0 0 20px white;
+                    }
+
+                    @container section-container (width <= 820px){
+                        inline-size: 100%; 
+                    }
+                }
+                & .figure__ranking{
+                    & ul{
+                        list-style: none;
+                        display: flex;
+                        justify-content: space-around;
+                    }
+                }
+                @container section-container (width <= 680px){
+                    grid-area: 2 / 1 / 3 / 3;
+                    & img{
+                        max-block-size: 450px;
+                        max-inline-size: 300px;
+                    }
+                }
+            }
+            & header{
+                grid-area: 1 / 2 / 2 / 4;
+                @container section-container (width <= 680px){
+                    grid-area: 1 / 1 / 2 / 3; 
+                }
+            }
+            & .article__generosList{
+                grid-area: 1 / 2 / 2 / 4;
+                place-self: end center;
+                @container section-container (width <= 680px){
+                    grid-area: 1 / 1 / 2 / 3; 
+                }
+            }
+            & .article__about-content{
+                grid-area: 2 / 2 / 3 / 2;
+                block-size: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+                justify-content: center;
+                & p{
+                    text-align: center;
+                    text-wrap: balance;
+                    block-size: auto;
+                }
+                & button{
+                    background-color: var(--textnav-color);
+                    padding: 10px;
+                    block-size: 40px;
+                    inline-size: 200px;
+                    border: 0;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    transition: box-shadow 300ms ease-in,
+                                scale 300ms ease-in;
+                    position: relative;
+                    &:hover{
+                        scale: 1.1;
+                        box-shadow: 0 0 10px color-mix(in srgb, var(--textnav-color) 60%, white);
+                    }
+                    &::before{
+                        position: absolute;
+                        content: "";
+                        inline-size: 30px;
+                        block-size: 30px;
+                        background-color: var(--lightblack-color);
+                        right: 17px;
+                        bottom: 4px;
+                        clip-path: polygon(0 0, 100% 50%, 0 100%);
+                    }
+
+                }
+                @container section-container (width <= 660px){
+                    grid-area: 2 / 2 / span / 2;
+                }
+                @container section-container (width <= 680px){
+                    grid-area: 3 / 1 / 5 / 2;
+                }
+
+            }
+            & .article__actors{
+                grid-area: 3 / 2 / 4 / 3;
+                @container section-container (width <= 935px){
+                    grid-area: 3 / 2 / 4 / 4;
+                }
+            }
+            & .article__about-film{
+                grid-area: 2 / 3 / 4 / 4;
+                @container section-container (width <= 935px){
+                    grid-area: 2 / 2 / 3 / 2;
+                    place-self: end start;
+                }
+                @container section-container (width <= 680px){
+                    grid-area: 4 / 2 / 5 / 3;
+                    place-self: center;
+                }
+            }
+        }
+    }
+}
+
+@media (width <= 722px){
+    .content-watch{
+        min-block-size: 100vb;
+        & .main__content-info{
+            block-size: 100%;
         }
     }
 }

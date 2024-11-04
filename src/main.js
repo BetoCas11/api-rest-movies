@@ -9,11 +9,12 @@ const URLAPIBase = "https://api.themoviedb.org/3";
 const URLAPI = "https://api.themoviedb.org/3/trending";
 
 const mainhome = document.querySelector(".grid > .section-main");
+const contentarticle = document.querySelector(".section-main > main > .main__article");
 const navHomeitems = [...document.querySelectorAll(".header-nav > nav > .nav__list >:not(:nth-child(1))")];
-const navHomelogo = document.querySelector(".header-nav > nav > .nav__list > .nav__item > a.uno");
+const navHomeSelect = document.querySelector(".header-nav > nav > .nav__list > .nav__item > select");
 const categorieslist = document.querySelector(".grid > .section-aside > aside > .aside__list");
+console.log(contentarticle);
 
-/* Capturar un evento delegado para obtener la imagen y título de cada card: */
 
 /* Capturar evento para ocultar el main del home por los valores de las categorías y también para mostrar todas las categorías de la API */
 
@@ -73,7 +74,11 @@ async function getCategoryPreviw(watch){
         usedGenres.add(categotyRandom);
         categoriesItems[i].textContent = categotyRandom;
     }
-    
+    geners.forEach(genre => {
+        const option = document.createElement("option");
+        navHomeSelect.insertAdjacentElement("beforeend", option);
+        option.insertAdjacentText("beforeend", genre?.name);
+    })
 }
 
 /* Nuevos Trailers: */
@@ -94,7 +99,6 @@ async function getNewTrailers(containertrailer, initial, end){
 
 }
 
-
 getTrending("movie", ".main__trendingMovies");
 getTrending("tv", ".main__tvShows");
 getTrendingAllimg("all", ".main__header > .main__img");
@@ -103,3 +107,14 @@ getCategoryPreviw("movie");
 
 getNewTrailers(".section__itemsnews-primary", 0, 3);
 getNewTrailers(".section__itemsnews-secondary", 3, 6);
+
+/* Capturar un evento delegado para obtener la imagen y título de cada card: */
+contentarticle.addEventListener("click", (e) => {
+    if (e.target.closest = "movie-card") {
+        const pictureUrl = e.target.attributes.src.textContent;
+        const pictureText = e.target.attributes.alt.textContent;
+        /* Usando sesión Storage para pasar estos valors guardados en el navegador y recuperarlos en el otro archivo */
+        sessionStorage.setItem('pictureUrl', pictureUrl); 
+        sessionStorage.setItem('pictureText', pictureText);
+    }
+});

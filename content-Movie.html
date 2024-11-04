@@ -1,6 +1,3 @@
-<!-- 1- Para tener la misma imagen y título de la card seleccionada (figure) podría escuchar un evento (mediante una delegación) y pasarle a un función como argumentos los títulos e img de la card seleccionada
-2- Veo que en la sección de nuevos trailers pdría hacer uso sel scrool snap y hacer componentes para los items de los trailers
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +29,7 @@
         <section class="section__infowatch">
             <article class="article__content-info">
                 <figure>
-                    <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/8PYqGSd8MOm5ce8io4qNSAiSExW.jpg" alt="Poster película">
+                    <img src="" alt="Poster película">
                     <figcaption class="figure__ranking">
                         <ul>
                             <li>73%</li>
@@ -42,7 +39,7 @@
                     </figcaption>
                 </figure>
                 <header>
-                    <h2>Alien: Romulus (2024)</h2>
+                    <h2></h2>
                 </header>
                 <ul class="article__generosList">
                     <li>HHH</li>
@@ -59,10 +56,18 @@
             </article>
         </section>
     </main>
-    <!-- <script src="src/main.js" type="module"></script> -->
+    <script type="module">
+        const imgUrl = sessionStorage.getItem('pictureUrl');
+        const textImg = sessionStorage.getItem('pictureText');
+        const headerTitle = document.querySelector("header > h2");
+        const imgPoster = document.querySelector("figure > img");
+
+        headerTitle.textContent = textImg;
+        imgPoster.src = imgUrl;
+        imgPoster.alt = textImg;
+
+    </script>
 
 </body>
 
 </html>
-
-<!-- Cuando el contenedor de section tenga 680px de ancho, hacer una nueva grilla el article, donde habrá dos columnas y 6 filas r-->

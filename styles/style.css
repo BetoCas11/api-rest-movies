@@ -36,6 +36,7 @@ body{
         }
         & .nav__list{
             display: flex;
+            align-items: center;
             list-style-type: none;
             gap: 20px;
             padding: 0;
@@ -54,7 +55,17 @@ body{
                         text-shadow: 0 0 10px white;
                     }
                 }
-                
+                & select{
+                    background-color: transparent;
+                    color: var(--textnav-color);
+                    padding: 3px;
+                    border-radius: 10px;
+                    inline-size: fit-content;
+                    cursor: pointer;
+                    & option{
+                        background-color: var(--lightblack-color);
+                    }
+                }
             }
             
         }
@@ -77,6 +88,12 @@ body{
                     outline: 2px solid var(--textnav-color); 
                     transform: scaleX(1.2);
                     transition-duration: 700ms;
+                    @container headerNav (width <= 900px){
+                        transform: scale(1.1);
+                    }
+                    @container headerNav (700px <= width <= 880px){
+                        transform: scaleX(1);
+                    }
                 }
                 & input{
                     inline-size: 80%;
@@ -170,7 +187,7 @@ body{
                             inline-size: 0%;
                             block-size: 1px;
                             bottom: 0;
-                            right: 0;
+                            left: 0;
                             transition: inline-size 300ms ease;
                         }
                         &:hover{

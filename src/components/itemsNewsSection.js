@@ -6,11 +6,11 @@ class ItemsnewTrailers extends HTMLElement {
    getItem(){
     return /*html */`
         <figure>
-            <img src="https://media.themoviedb.org/t/p/w1920_and_h427_multi_faces/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg" alt="Trailers Nuevos">
+            <img src="${this.getAttribute("sourceimg")}" alt="Trailers Nuevos">
             <figcaption>
                 <button><div></div></button>
-                <p>Venom 2</p>
-                <span>3:00</span>
+                <p>${this.getAttribute("paragraph")}</p>
+                <span>👁️${this.getAttribute("popularity")}</span>
             </figcaption>
         </figure>
         ${this.getStyles()}
@@ -42,7 +42,7 @@ class ItemsnewTrailers extends HTMLElement {
                 justify-content: space-around;
                 align-items: center;
                 background-color: rgba(128, 128, 128, 0.2);
-                block-size: 30px;
+                block-size: 45px;
                 border-radius: 10px;
                 position: absolute;
                 bottom: 0;
@@ -60,8 +60,10 @@ class ItemsnewTrailers extends HTMLElement {
                     block-size: 20px;
                     background-color: var(--textnav-color);
                     clip-path: polygon(0 0, 100% 50%, 0 100%);
-
                   }
+                }
+                & span{
+                  font-size: 10px;
                 }
 
             }

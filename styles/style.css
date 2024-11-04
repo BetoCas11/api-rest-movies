@@ -111,6 +111,7 @@ body{
     grid-template-columns: 320px 1fr;
     grid-template-rows: 1fr;
     position: relative;
+    view-transition-name: maingrid;
     & .section-main{
         grid-area: 1 / 2 / 2 / 3;
         @container sectionAside (width <= 900px){
@@ -134,8 +135,10 @@ body{
                     margin-block-start: 20px;
                     object-fit: cover;
                     border-radius: 10px;
+                    filter: grayscale(100%);
                     &:hover{
                         box-shadow: 0 0 10px white;
+                        filter: grayscale(0);
                     }
                     @container sectionAside (width <= 1000px){
                         inline-size: 95%;
@@ -264,6 +267,7 @@ body{
     inline-size: 100%;
     block-size: calc(100vb - 85px);
     padding-inline: 20px;
+    view-transition-name: infowatch;
     & .section__infowatch{
         inline-size: 100%;
         block-size: calc(100% - 30px);
@@ -404,6 +408,17 @@ body{
     }
 }
 
+/* Ocultar contenido para eventos espeficos; */
+.notshowmain{
+    display: none;
+}
+
+::view-transition-old(maingrid){
+    animation: fade 0.2s linear forwards;
+}
+::view-transition-new(infowatch){
+    animation: fade 0.3s linear reverse;
+}
 @media (width <= 722px){
     .content-watch{
         min-block-size: 100vb;
@@ -412,3 +427,17 @@ body{
         }
     }
 }
+
+@view-transition {navigation: auto;}
+
+@keyframes fade {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  
+    100% {
+      opacity: 0;
+      transform: translateY(-70px);
+    }
+  }

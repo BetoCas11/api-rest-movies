@@ -7,10 +7,10 @@ class MovieCard extends HTMLElement{
         return /*html */`
         <figure>
             <a href="../content-Movie.html">
-            <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/8PYqGSd8MOm5ce8io4qNSAiSExW.jpg" alt="Poster película">
+            <img src="${this.getAttribute("src")}" alt="Poster película ${this.getAttribute("alt")}">
             <figcaption>
-                <h3>Título de la película: ALIEN</h3>
-                <p>Fecha de Lanzamiento</p>
+                <h3>${this.getAttribute("alt")}</h3>
+                <p>${this.getAttribute("date")}</p>
             </figcaption>
             </a>
         </figure>
@@ -22,8 +22,9 @@ class MovieCard extends HTMLElement{
             <style>
                 figure{
                     margin: 0;
-                    block-size: max-content;
+                    block-size: 370px;
                     inline-size: 150px;
+                    aspect-ratio: 15 / 37;
                     outline: 1px solid var(--graycontorn);
                     border-radius: 10px;
                     overflow: hidden;
@@ -41,11 +42,13 @@ class MovieCard extends HTMLElement{
                     & a{list-style: none; text-decoration: none;}
                     & img{
                         inline-size: 100%;
-                        block-size: 160px;
+                        block-size: 200px;
                         object-fit: cover;
+                        aspect-ratio: 3 / 4;
                     }
                     & figcaption{
-                        block-size: 100%;
+                        block-size: 40%;
+                        align-content: center;
                         & h3{
                             color: color-mix(in srgb, var(--textnav-color) 45%, white);
                             font-size: 20px;

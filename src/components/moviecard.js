@@ -5,9 +5,9 @@ class MovieCard extends HTMLElement{
     }
     getItem(){
         return /*html */`
-        <figure>
+        <figure media_type="${this.getAttribute("media_type")}">
             <a href="../content-Movie.html">
-            <img src="${this.getAttribute("src")}" alt="Poster película ${this.getAttribute("alt")}">
+            <img src="${this.getAttribute("src")}" alt="Poster película ${this.getAttribute("alt")}" idmovie="${this.getAttribute("idmovie")}">
             <figcaption>
                 <h3>${this.getAttribute("alt")}</h3>
                 <p>${this.getAttribute("date")}</p>

@@ -305,7 +305,7 @@ body{
                 grid-template-columns: repeat(2, 1fr);
             }
             @container section-container (width <= 680px){
-                grid-template-rows: .5fr 3fr repeat(2, 1fr);
+                grid-template-rows: .8fr 3fr repeat(2, 1fr);
                 row-gap: 10px;
             }
             & figure{
@@ -345,6 +345,11 @@ body{
             }
             & header{
                 grid-area: 1 / 2 / 2 / 4;
+                inline-size: 100%;
+                text-align: center;
+                & h2{
+                    font-size: 30px;
+                }
                 @container section-container (width <= 680px){
                     grid-area: 1 / 1 / 2 / 3; 
                 }
@@ -352,6 +357,10 @@ body{
             & .article__generosList{
                 grid-area: 1 / 2 / 2 / 4;
                 place-self: end center;
+                display: flex;
+                column-gap: 50px;
+                list-style: none;
+                color: color-mix(in srgb, var(--textnav-color) 50%, white);
                 @container section-container (width <= 680px){
                     grid-area: 1 / 1 / 2 / 3; 
                 }

@@ -13,7 +13,6 @@ const contentarticle = document.querySelector(".section-main > main > .main__art
 const navHomeitems = [...document.querySelectorAll(".header-nav > nav > .nav__list >:not(:nth-child(1))")];
 const navHomeSelect = document.querySelector(".header-nav > nav > .nav__list > .nav__item > select");
 const categorieslist = document.querySelector(".grid > .section-aside > aside > .aside__list");
-console.log(contentarticle);
 
 
 /* Capturar evento para ocultar el main del home por los valores de las categorías y también para mostrar todas las categorías de la API */
@@ -46,12 +45,14 @@ async function getTrending(watch, maininfo){
     const data = await res.json();
     const containerInfo = document.querySelector(maininfo);
     const movies = data?.results;
-    /* console.log({data, movies}); */
+     console.log({data, movies}); 
     movies.forEach(movie => {
         const cardMovie = document.createElement("movie-card");
         cardMovie.setAttribute("alt", `${movie?.title || movie?.name}`);
         cardMovie.setAttribute("src", `https://image.tmdb.org/t/p/w500${movie?.poster_path}`);
-        cardMovie.setAttribute("date", `${movie?.release_date || movie.first_air_date}`)
+        cardMovie.setAttribute("date", `${movie?.release_date || movie.first_air_date}`);
+        cardMovie.setAttribute("idmovie", `${movie?.id}`);
+        cardMovie.setAttribute("media_type", `${movie?.media_type}`);
         containerInfo.insertAdjacentElement("beforeend", cardMovie);
     }); 
 }
@@ -63,6 +64,7 @@ async function getCategoryPreviw(watch){
     const categoriesItems = [...document.querySelectorAll(".aside__list > .aside__items")];
 
     const geners = data?.genres;
+    console.log(geners);
     const usedGenres = new Set();
 
     for (let i = 0; i < categoriesItems.length; i++) {
@@ -108,13 +110,19 @@ getCategoryPreviw("movie");
 getNewTrailers(".section__itemsnews-primary", 0, 3);
 getNewTrailers(".section__itemsnews-secondary", 3, 6);
 
+
+
 /* Capturar un evento delegado para obtener la imagen y título de cada card: */
 contentarticle.addEventListener("click", (e) => {
     if (e.target.closest = "movie-card") {
         const pictureUrl = e.target.attributes.src.textContent;
         const pictureText = e.target.attributes.alt.textContent;
+        const idwatch = e.target.attributes.idmovie.textContent;
+        const mediaTypeFilm = e.target.attributes.media_type.textContent;
         /* Usando sesión Storage para pasar estos valors guardados en el navegador y recuperarlos en el otro archivo */
         sessionStorage.setItem('pictureUrl', pictureUrl); 
         sessionStorage.setItem('pictureText', pictureText);
+        sessionStorage.setItem("idwatch", idwatch);
+        sessionStorage.setItem("media", mediaTypeFilm);
     }
 });

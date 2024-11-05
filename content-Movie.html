@@ -40,10 +40,9 @@
                 </figure>
                 <header>
                     <h2></h2>
+                    <span></span>
                 </header>
-                <ul class="article__generosList">
-                    <li>HHH</li>
-                </ul>
+                <ul class="article__generosList"></ul>
                 <div class="article__about-content">
                     <p class="article__about-content">Mientras exploran en las profundidades de una estación espacial abandonada, un grupo de jóvenes colonizadores del espacio se encuentran cara a cara con la forma de vida más aterradora del universo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, ducimus cumque facilis perspiciatis vel iure molestias assumenda soluta quas ratione!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, cumque in nesciunt deserunt nam consectetur nostrum ex cum placeat adipisci mollitia magni, qui ut deleniti aspernatur magnam similique dignissimos voluptatibus?</p>
                     <button>Reproducir trailer</button>
@@ -57,14 +56,39 @@
         </section>
     </main>
     <script type="module">
+        import {APIKEY} from "./src/secret.js";
+
         const imgUrl = sessionStorage.getItem('pictureUrl');
         const textImg = sessionStorage.getItem('pictureText');
+        const idfilm = sessionStorage.getItem("idwatch");
+        const mediaType = sessionStorage.getItem("media");
+
         const headerTitle = document.querySelector("header > h2");
+        const taglineTitle = document.querySelector("header > span");
         const imgPoster = document.querySelector("figure > img");
+        const detailParagraph = document.querySelector(".article__about-content > p");
+        const listGeners = document.querySelector(".article__generosList");
+
+
+
+        async function idFilmDeatails(watch, id){
+            const res = await fetch(`https://api.themoviedb.org/3/${watch}/${id}?api_key=${APIKEY}&language=es-MX`);
+            const data = await res.json();
+            data?.genres.forEach(element => {
+                const itemsList = document.createElement("li");
+                itemsList.textContent = element?.name;
+                listGeners.insertAdjacentElement("beforeend", itemsList)
+                console.log(element.name);
+            });
+            console.log(data);
+            detailParagraph.textContent = data?.overview || /*html*/`Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni autem ipsum nostrum culpa pariatur accusantium at blanditiis sequi molestias aliquam.`;
+            taglineTitle.textContent = data?.tagline;
+        }
 
         headerTitle.textContent = textImg;
         imgPoster.src = imgUrl;
         imgPoster.alt = textImg;
+        idFilmDeatails(mediaType, idfilm);
 
     </script>
 

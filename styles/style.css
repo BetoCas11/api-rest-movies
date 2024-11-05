@@ -133,7 +133,7 @@ body{
         grid-area: 1 / 2 / 2 / 3;
         @container sectionAside (width <= 900px){
             display: block;
-            inline-size: calc(100vw - 15px);
+            inline-size: calc(100%);
             grid-area: 1 / 1 / 2 / 3;
         }
         & main{

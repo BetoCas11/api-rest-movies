@@ -61,6 +61,10 @@ async function getCategoryPreviw(watch){
     const res =  await fetch(`${URLAPIBase}/genre/${watch}/list?api_key=${APIKEY}&language=es-MX`);
     const data = await res.json();
     const categoriesItems = [...document.querySelectorAll(".aside__list > .aside__items")];
+    const groupOption = document.createElement("optgroup");
+    groupOption.setAttribute("class", `${watch}`);
+    groupOption.setAttribute("label", `${watch}`);
+    console.log(groupOption);
 
     const geners = data?.genres;
     console.log(geners);
@@ -77,13 +81,14 @@ async function getCategoryPreviw(watch){
     }
     geners.forEach(genre => {
         const option = document.createElement("option");
-        navHomeSelect.insertAdjacentElement("beforeend", option);
+        navHomeSelect.insertAdjacentElement("beforeend", groupOption);
+        groupOption.insertAdjacentElement("beforeend", option);
         option.insertAdjacentText("beforeend", genre?.name);
         option.setAttribute("idcategory", genre?.id);
     })
 }
 
-async function getAllCategories(watch, idgenre, containerCategory){
+async function getAllCategories(watch, idgenre, containerCategory, ){
     const res =  await fetch(`${URLAPIBase}/discover/${watch}?include_adult=true&include_video=false&language=es-MX&page=1&sort_by=popularity.desc&with_genres=${idgenre}&api_key=${APIKEY}`);
     const data = await res.json();
     const resultItems = data?.results;
@@ -123,6 +128,7 @@ getTrending("tv", ".main__tvShows");
 getTrendingAllimg("all", ".main__header > .main__img");
  
 getCategoryPreviw("movie");
+getCategoryPreviw("tv");
 
 getNewTrailers(".section__itemsnews-primary", 0, 3);
 getNewTrailers(".section__itemsnews-secondary", 3, 6);
@@ -146,19 +152,23 @@ contentarticle.addEventListener("click", (e) => {
 
 
 /* Capturar evento para ocultar el main del home por los valores de las categorías y también para mostrar todas las categorías de la API */
-navHomeSelect.addEventListener("change", () => {
-    
+navHomeSelect.addEventListener("change", (e) => {
     mainhome.classList.add("notshowmain");
     sectionMain.insertAdjacentHTML("beforeend", /*html*/`<article class="categories">
         <div class="cancelbutton"></div>
         <h2>Resultados de la categoría: <span>${navHomeSelect.value}</span></h2>
         <div class="resultscategory"></div>
-    </article>`);
+        </article>`);
     const filmidCategory = navHomeSelect.selectedOptions[0].attributes[0].textContent;
     console.log(navHomeSelect.selectedOptions[0].attributes[0]);
     navHomeitems.forEach(items => items.style.display = "none");
     navHomeSelect.style.display = "none";
-    getAllCategories("movie", filmidCategory, ".categories > .resultscategory"); 
+    console.log(e.target.selectedOptions[0]);
+    if (e.target.selectedOptions[0].closest(".movie")){
+        getAllCategories("movie", filmidCategory, ".categories > .resultscategory"); 
+    } else{
+        getAllCategories("tv", filmidCategory, ".categories > .resultscategory");
+    }
     const categoryid = document.querySelector(".grid > .section-main > .categories");
     categoryid.addEventListener("click", (e) => {
         if(e.target.closest(".cancelbutton")){

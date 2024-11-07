@@ -8,14 +8,13 @@ customElements.define('items-new-trailers', ItemsnewTrailers);
 const URLAPIBase = "https://api.themoviedb.org/3";
 const URLAPI = "https://api.themoviedb.org/3/trending";
 
-const mainhome = document.querySelector(".grid > .section-main");
+const sectionMain = document.querySelector(".grid > .section-main");
+const mainhome = document.querySelector(".grid > .section-main > main");
 const contentarticle = document.querySelector(".section-main > main > .main__article");
-const navHomeitems = [...document.querySelectorAll(".header-nav > nav > .nav__list >:not(:nth-child(1))")];
+const navHomeitems = [...document.querySelectorAll(".header-nav > nav > .nav__list >:not(:nth-child(1), :nth-child(4))")];
 const navHomeSelect = document.querySelector(".header-nav > nav > .nav__list > .nav__item > select");
 const categorieslist = document.querySelector(".grid > .section-aside > aside > .aside__list");
 
-
-/* Capturar evento para ocultar el main del home por los valores de las categorías y también para mostrar todas las categorías de la API */
 
  /*categorieslist.addEventListener("click", (e) => {
     if (e.target.closest("li")) {
@@ -80,7 +79,25 @@ async function getCategoryPreviw(watch){
         const option = document.createElement("option");
         navHomeSelect.insertAdjacentElement("beforeend", option);
         option.insertAdjacentText("beforeend", genre?.name);
+        option.setAttribute("idcategory", genre?.id);
     })
+}
+
+async function getAllCategories(watch, idgenre, containerCategory){
+    const res =  await fetch(`${URLAPIBase}/discover/${watch}?include_adult=true&include_video=false&language=es-MX&page=1&sort_by=popularity.desc&with_genres=${idgenre}&api_key=${APIKEY}`);
+    const data = await res.json();
+    const resultItems = data?.results;
+    console.log(data?.results);
+    const container = document.querySelector(containerCategory);
+    resultItems.forEach(item => {
+        const categoryfilm = document.createElement("movie-card");
+        categoryfilm.setAttribute("alt", `${item?.title || item?.name}`);
+        categoryfilm.setAttribute("src", `https://image.tmdb.org/t/p/w500${item?.poster_path}`);
+        categoryfilm.setAttribute("date", `${item?.release_date || item.first_air_date}`);
+        container.insertAdjacentElement("beforeend", categoryfilm);
+    })
+
+    
 }
 
 /* Nuevos Trailers: */
@@ -126,3 +143,34 @@ contentarticle.addEventListener("click", (e) => {
         sessionStorage.setItem("media", mediaTypeFilm);
     }
 });
+
+
+/* Capturar evento para ocultar el main del home por los valores de las categorías y también para mostrar todas las categorías de la API */
+navHomeSelect.addEventListener("change", () => {
+    
+    mainhome.classList.add("notshowmain");
+    sectionMain.insertAdjacentHTML("beforeend", /*html*/`<article class="categories">
+        <div class="cancelbutton"></div>
+        <h2>Resultados de la categoría: <span>${navHomeSelect.value}</span></h2>
+        <div class="resultscategory"></div>
+    </article>`);
+    const filmidCategory = navHomeSelect.selectedOptions[0].attributes[0].textContent;
+    console.log(navHomeSelect.selectedOptions[0].attributes[0]);
+    navHomeitems.forEach(items => items.style.display = "none");
+    navHomeSelect.style.display = "none";
+    getAllCategories("movie", filmidCategory, ".categories > .resultscategory"); 
+    const categoryid = document.querySelector(".grid > .section-main > .categories");
+    categoryid.addEventListener("click", (e) => {
+        if(e.target.closest(".cancelbutton")){
+            mainhome.classList.remove("notshowmain");
+            categoryid.classList.add("notshowmain");
+            categoryid.remove();
+            navHomeitems.forEach(items => items.style.display = "block");
+            navHomeSelect.style.display = "block";
+            navHomeSelect.value = "Géneros";
+    }
+    })
+    
+});
+
+

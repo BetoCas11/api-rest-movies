@@ -44,7 +44,7 @@
                 </header>
                 <ul class="article__generosList"></ul>
                 <div class="article__about-content">
-                    <p class="article__about-content">Mientras exploran en las profundidades de una estación espacial abandonada, un grupo de jóvenes colonizadores del espacio se encuentran cara a cara con la forma de vida más aterradora del universo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, ducimus cumque facilis perspiciatis vel iure molestias assumenda soluta quas ratione!. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, cumque in nesciunt deserunt nam consectetur nostrum ex cum placeat adipisci mollitia magni, qui ut deleniti aspernatur magnam similique dignissimos voluptatibus?</p>
+                    <p class="article__about-content"></p>
                     <button>Reproducir trailer</button>
                 </div>
                 <div class="article__actors"> Actores de:</div>
@@ -77,8 +77,7 @@
             data?.genres.forEach(element => {
                 const itemsList = document.createElement("li");
                 itemsList.textContent = element?.name;
-                listGeners.insertAdjacentElement("beforeend", itemsList)
-                console.log(element.name);
+                listGeners.insertAdjacentElement("beforeend", itemsList);
             });
             console.log(data);
             detailParagraph.textContent = data?.overview || /*html*/`Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni autem ipsum nostrum culpa pariatur accusantium at blanditiis sequi molestias aliquam.`;

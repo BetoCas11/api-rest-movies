@@ -218,6 +218,59 @@ body{
                 }
             }
         }
+        & .categories{
+            padding-block-start: 20px;
+            block-size: 100%;
+            align-content: center;
+            position: relative;
+            & .cancelbutton{
+                inline-size: 20px;
+                block-size: 30px;
+                background-color: transparent;
+                position: absolute;
+                top: 2px;
+                left: 10px;
+                &::before{
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    inline-size: 3px;
+                    block-size: 100%;
+                    background-color: color-mix(in srgb, red 90%, black);
+                    transform-origin: bottom right;
+                    rotate: 35deg;
+                }
+                &::after{
+                    content: "";
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    inline-size: 3px;
+                    block-size: 100%;
+                    background-color: color-mix(in srgb, red 90%, black);
+                    transform-origin: bottom left;
+                    rotate: -35deg;
+                }
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+            & h2{
+                text-align: center;
+                margin-block-end: 20px;
+                & span{
+                    color: color-mix(in srgb, var(--textnav-color) 50%, white);
+                }
+            }
+            & .resultscategory{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding-inline: 20px;
+                gap: 10px 20px;
+            }
+        }
     }
     & .section-aside{
         background-color: var(--lightblack-color);

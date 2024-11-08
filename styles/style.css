@@ -508,12 +508,17 @@ body{
 ::view-transition-new(infowatch){
     animation: fade 0.3s linear reverse;
 }
-@media (width <= 722px){
+@media (width <= 721px){
     .content-watch{
         min-block-size: 100vb;
         & .main__content-info{
             block-size: 100%;
         }
+    }
+}
+@media (width = 722px){
+    .content-watch{
+        min-block-size: 100vb;
     }
 }
 

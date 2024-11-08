@@ -14,18 +14,8 @@ const contentarticle = document.querySelector(".section-main > main > .main__art
 const navHomeitems = [...document.querySelectorAll(".header-nav > nav > .nav__list >:not(:nth-child(1), :nth-child(4))")];
 const navHomeSelect = document.querySelector(".header-nav > nav > .nav__list > .nav__item > select");
 const categorieslist = document.querySelector(".grid > .section-aside > aside > .aside__list");
-
-
- /*categorieslist.addEventListener("click", (e) => {
-    if (e.target.closest("li")) {
-        console.log(e.target.textContent);
-        mainhome.classList.add("notshowmain");
-        navHomeitems.forEach(item => {
-            item.classList.toggle("notshowmain");
-        });
-    }
-});*/
- 
+const navinputSearch = document.querySelector(".header-nav > nav > form");
+const inputvalue = document.querySelector(".header-nav > nav > form > label > input[type=search]");
 
 /* Función para el header con img aleatorias: */
 async function getTrendingAllimg(watch, maininfo){
@@ -123,6 +113,35 @@ async function getNewTrailers(containertrailer, initial, end){
 
 }
 
+async function getMoviebySearch(value, containerquery){
+    const res = await fetch(`${URLAPIBase}/search/multi?query=${value}&include_adult=true&api_key=${APIKEY}&language=es-MX&page=1`);
+    const data =  await res.json();
+    const container = document.querySelector(containerquery);
+
+    data?.results.forEach(item => {
+        const cardResultsearch = document.createElement("movie-card");
+        cardResultsearch.setAttribute("alt", `${item?.title || item?.name}`);
+        cardResultsearch.setAttribute("src", `https://image.tmdb.org/t/p/w500${item?.poster_path}`);
+        cardResultsearch.setAttribute("date", `${item?.release_date || item.first_air_date}`);
+        container.insertAdjacentElement("beforeend", cardResultsearch);
+    });
+}
+
+function delegateEvents(queyContainer){
+    queyContainer.addEventListener("click", (e) => {
+        if(e.target.closest(".cancelbutton")){
+            mainhome.classList.remove("notshowmain");
+            queyContainer.classList.add("notshowmain");
+            queyContainer.remove();
+            navHomeitems.forEach(items => items.style.display = "block");
+            navHomeSelect.style.display = "block";
+            navHomeSelect.value = "Géneros";
+            navinputSearch.classList.remove("notshowmain");
+    }
+    })
+}
+
+
 getTrending("movie", ".main__trendingMovies");
 getTrending("tv", ".main__tvShows");
 getTrendingAllimg("all", ".main__header > .main__img");
@@ -132,7 +151,6 @@ getCategoryPreviw("tv");
 
 getNewTrailers(".section__itemsnews-primary", 0, 3);
 getNewTrailers(".section__itemsnews-secondary", 3, 6);
-
 
 
 /* Capturar un evento delegado para obtener la imagen y título de cada card: */
@@ -170,17 +188,28 @@ navHomeSelect.addEventListener("change", (e) => {
         getAllCategories("tv", filmidCategory, ".categories > .resultscategory");
     }
     const categoryid = document.querySelector(".grid > .section-main > .categories");
-    categoryid.addEventListener("click", (e) => {
-        if(e.target.closest(".cancelbutton")){
-            mainhome.classList.remove("notshowmain");
-            categoryid.classList.add("notshowmain");
-            categoryid.remove();
-            navHomeitems.forEach(items => items.style.display = "block");
-            navHomeSelect.style.display = "block";
-            navHomeSelect.value = "Géneros";
-    }
-    })
+    delegateEvents(categoryid);
     
 });
 
+navinputSearch.addEventListener("submit", (e) => {
+    e.preventDefault();
+    mainhome.classList.add("notshowmain");
+    mainhome.insertAdjacentHTML("afterend", /*html */`
+        <article class="searchSection categories">
+            <div class="cancelbutton"></div>
+            <h2>Búsqueda relacionada con: <span>${inputvalue.value}</span></h2>
+            <section class="resultSearch resultscategory"></section>
+        </article>
+    `);
+    
+    
+    const containerSearch = document.querySelector(".grid > .section-main > .searchSection");
+    navHomeitems.forEach(items => items.style.display = "none");
+    navHomeSelect.style.display = "none";
+    /* navinputSearch.classList.add("notshowmain"); */
+    delegateEvents(containerSearch,  ".grid > .section-main > .searchSection");
 
+    getMoviebySearch(inputvalue.value, ".grid > .section-main > .searchSection > .resultSearch");
+    inputvalue.value = "";
+});

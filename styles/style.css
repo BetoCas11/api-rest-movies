@@ -62,8 +62,13 @@ body{
                     border-radius: 10px;
                     inline-size: fit-content;
                     cursor: pointer;
+                    & optgroup{
+                        background-color: black;
+                        text-align: center;
+                    }
                     & option{
                         background-color: var(--lightblack-color);
+                        text-align: start;
                     }
                 }
             }
@@ -267,8 +272,13 @@ body{
                 display: flex;
                 flex-wrap: wrap;
                 justify-content: center;
-                padding-inline: 20px;
+                padding: 20px;
                 gap: 10px 20px;
+            }
+        }
+        & .searchSection{
+            .resultSearch{
+                background-color: var(--lightblack-color);
             }
         }
     }

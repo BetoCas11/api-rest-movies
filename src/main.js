@@ -195,14 +195,13 @@ navHomeSelect.addEventListener("change", (e) => {
 navinputSearch.addEventListener("submit", (e) => {
     e.preventDefault();
     mainhome.classList.add("notshowmain");
-    mainhome.insertAdjacentHTML("afterend", /*html */`
+    mainhome.insertAdjacentHTML("afterend", /*html*/`
         <article class="searchSection categories">
             <div class="cancelbutton"></div>
             <h2>Búsqueda relacionada con: <span>${inputvalue.value}</span></h2>
             <section class="resultSearch resultscategory"></section>
         </article>
     `);
-    
     
     const containerSearch = document.querySelector(".grid > .section-main > .searchSection");
     navHomeitems.forEach(items => items.style.display = "none");
@@ -212,4 +211,17 @@ navinputSearch.addEventListener("submit", (e) => {
 
     getMoviebySearch(inputvalue.value, ".grid > .section-main > .searchSection > .resultSearch");
     inputvalue.value = "";
+    const repetidos = [...document.querySelectorAll(".grid > .section-main > .searchSection")];
+    if (repetidos.length >= 2) {
+        const garbagearticle = document.querySelectorAll(".section-main > article:not(:nth-child(2))");
+       garbagearticle.forEach(item => item.remove());
+    }
+    
 });
+
+
+/* Idea para la acumulación de múltiples articles:
+    const repetidos = document.querySelectorAll(".section-main > article:not(:nth-child(2))");
+    [...repetidos].forEach(item => item.classList.add("notshowmain"));    
+    Para ello debería de probar si preguntando si ya existe un article, en caso de que si, seleccionar todos los aricles, a exepción del último article consultado, borrarlo
+*/

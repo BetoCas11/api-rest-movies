@@ -28,7 +28,7 @@
     <main class="main__content-info">
         <section class="section__infowatch">
             <article class="article__content-info">
-                <figure>
+                <figure class="article__containerimg">
                     <img src="" alt="Poster película">
                     <figcaption class="figure__ranking">
                         <ul>
@@ -47,8 +47,7 @@
                     <p class="article__about-content"></p>
                     <button>Reproducir trailer</button>
                 </div>
-                <div class="article__actors"> Actores de:
-                    img*10[src=""]
+                <div class="article__actors">
                 </div>
                 <aside class="article__about-film">
                     <h2>Director <span></span></h2>
@@ -90,6 +89,24 @@
         imgPoster.src = imgUrl;
         imgPoster.alt = textImg;
         idFilmDeatails(mediaType, idfilm);
+
+        /* Actors: */
+        async function crediActors(watch, id, querySelector){
+            const res = await fetch(`https://api.themoviedb.org/3/${watch}/${id}/credits?api_key=${APIKEY}&language=es-MX`);
+            const data = await res.json();
+            const cast = data?.cast;
+            const containerActors = document.querySelector(querySelector)
+            console.log(data?.cast);
+            cast.forEach(item => {
+                console.log(item?.name);
+                containerActors.insertAdjacentHTML("beforeend", /*html*/`
+                <figure class="actors__container"><img src="https://image.tmdb.org/t/p/w185/${item?.profile_path}" alt="" title="${item?.character}"><figcaption>${item.name}</figcaption></figure>
+                `)
+            })
+
+
+        }
+        crediActors(mediaType, idfilm, ".article__actors");
 
     </script>
 

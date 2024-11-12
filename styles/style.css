@@ -371,7 +371,7 @@ body{
                 grid-template-rows: .8fr 3fr repeat(2, 1fr);
                 row-gap: 10px;
             }
-            & figure{
+            & .article__containerimg{
                 inline-size: 100%;
                 grid-area: 1 / 1 / 4 / 2;
                 block-size: 100%;
@@ -478,6 +478,27 @@ body{
             }
             & .article__actors{
                 grid-area: 3 / 2 / 4 / 3;
+                block-size: 100%;
+                inline-size: 100%;
+                overflow: scroll hidden;
+                display: flex;
+                gap: 15px;
+                padding-inline: 10px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--textnav-color) black ;
+                /* scroll-snap-type: x mandatory; */
+                & .actors__container{
+                    inline-size: max-content;
+                    block-size: 100%;
+                    & img{
+                        block-size: 120px;
+                        inline-size: 110px;
+                    }
+                    & figcaption{
+                        text-align: center;
+                    }
+                }
+
                 @container section-container (width <= 935px){
                     grid-area: 3 / 2 / 4 / 4;
                 }

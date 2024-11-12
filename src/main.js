@@ -207,7 +207,7 @@ navinputSearch.addEventListener("submit", (e) => {
     navHomeitems.forEach(items => items.style.display = "none");
     navHomeSelect.style.display = "none";
     /* navinputSearch.classList.add("notshowmain"); */
-    delegateEvents(containerSearch,  ".grid > .section-main > .searchSection");
+    delegateEvents(containerSearch);
 
     getMoviebySearch(inputvalue.value, ".grid > .section-main > .searchSection > .resultSearch");
     inputvalue.value = "";

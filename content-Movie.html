@@ -32,9 +32,9 @@
                     <img src="" alt="Poster película">
                     <figcaption class="figure__ranking">
                         <ul>
-                            <li>73%</li>
+                            <li></li>
                             <li>Ciencia Ficcón</li>
-                            <li>1H 59m</li>
+                            <li></li>
                         </ul>
                     </figcaption>
                 </figure>
@@ -67,6 +67,7 @@
         const headerTitle = document.querySelector("header > h2");
         const taglineTitle = document.querySelector("header > span");
         const imgPoster = document.querySelector("figure > img");
+        const imgranking = document.querySelectorAll(".article__containerimg > .figure__ranking > ul > li");
         const detailParagraph = document.querySelector(".article__about-content > p");
         const listGeners = document.querySelector(".article__generosList");
 
@@ -83,6 +84,9 @@
             console.log(data);
             detailParagraph.textContent = data?.overview || /*html*/`Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni autem ipsum nostrum culpa pariatur accusantium at blanditiis sequi molestias aliquam.`;
             taglineTitle.textContent = data?.tagline;
+            mediaType == "movie" ? imgranking[2].textContent = `${parseInt(data?.runtime / 60)}h: ${parseInt(((data?.runtime / 60) % 1) * 60)}min` : imgranking[2].textContent = `Temporadas: ${data?.number_of_seasons}, con ${data?.number_of_episodes} episodios`;
+            imgranking[0].textContent =  `⭐${((data?.vote_average * 100) / 10).toFixed(1)}% de valoración`;
+            
         }
 
         headerTitle.textContent = textImg;
@@ -98,7 +102,6 @@
             const containerActors = document.querySelector(querySelector)
             console.log(data?.cast);
             cast.forEach(item => {
-                console.log(item?.name);
                 containerActors.insertAdjacentHTML("beforeend", /*html*/`
                 <figure class="actors__container"><img src="https://image.tmdb.org/t/p/w185/${item?.profile_path}" alt="" title="${item?.character}"><figcaption>${item.name}</figcaption></figure>
                 `)

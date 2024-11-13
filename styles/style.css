@@ -396,6 +396,7 @@ body{
                         list-style: none;
                         display: flex;
                         justify-content: space-around;
+                        align-items: center;
                     }
                 }
                 @container section-container (width <= 680px){
@@ -540,6 +541,11 @@ body{
 @media (width = 722px){
     .content-watch{
         min-block-size: 100vb;
+    }
+}
+@media (height <= 850px){
+    .main__content-info{
+        block-size: max-content;
     }
 }
 

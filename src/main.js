@@ -90,7 +90,7 @@ async function getAllCategories(watch, idgenre, containerCategory, ){
         categoryfilm.setAttribute("src", `https://image.tmdb.org/t/p/w500${item?.poster_path}`);
         categoryfilm.setAttribute("date", `${item?.release_date || item.first_air_date}`);
         categoryfilm.setAttribute("idmovie", `${item?.id}`);
-        categoryfilm.setAttribute("media_type", `${item?.media_type}`);
+        categoryfilm.setAttribute("media_type", `${watch}`);
         container.insertAdjacentElement("beforeend", categoryfilm);
     })
 
@@ -236,9 +236,3 @@ navinputSearch.addEventListener("submit", (e) => {
     
 });
 
-
-/* Idea para la acumulación de múltiples articles:
-    const repetidos = document.querySelectorAll(".section-main > article:not(:nth-child(2))");
-    [...repetidos].forEach(item => item.classList.add("notshowmain"));    
-    Para ello debería de probar si preguntando si ya existe un article, en caso de que si, seleccionar todos los aricles, a exepción del último article consultado, borrarlo
-*/

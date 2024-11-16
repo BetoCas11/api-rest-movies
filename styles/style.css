@@ -221,6 +221,27 @@ body{
                         justify-content: center;
                     }
                 }
+                & .main__movies figure{
+                    margin: 0;
+                    block-size: 370px;
+                    inline-size: 150px;
+                    aspect-ratio: 15 / 37;
+                    outline: 1px solid var(--graycontorn);
+                    border-radius: 10px;
+                    overflow: hidden;
+                    background-color: var(--lightblack-color);
+                    animation: loading 1.4s infinite;
+                    & img{
+                        inline-size: 100%;
+                        block-size: 200px;
+                        object-fit: cover;
+                        background-color: gray;
+                        aspect-ratio: 3 / 4;
+                    }
+                    &:nth-of-type(2n){
+                        animation-delay: .2s;
+                    }
+                }
             }
         }
         & .categories{
@@ -470,6 +491,16 @@ body{
                     }
 
                 }
+                & dialog[open]{
+                    inline-size: 80%;
+                    block-size: 40%;
+                    display: block;
+                    margin: 0 auto;
+                    & iframe{
+                        block-size: 100%;
+                        inline-size: 100%;
+                    }
+                }
                 @container section-container (width <= 660px){
                     grid-area: 2 / 2 / span / 2;
                 }
@@ -589,5 +620,14 @@ body{
     100% {
       opacity: 0;
       transform: translateY(-70px);
+    }
+  }
+
+  @keyframes loading{
+    0%, 100%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
     }
   }

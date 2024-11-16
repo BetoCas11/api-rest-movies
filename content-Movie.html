@@ -46,6 +46,7 @@
                 <div class="article__about-content">
                     <p class="article__about-content"></p>
                     <button>Reproducir trailer</button>
+                    <dialog><iframe src=""></iframe></dialog>
                 </div>
                 <div class="article__actors">
                 </div>
@@ -71,6 +72,7 @@
         const imgranking = document.querySelectorAll(".article__containerimg > .figure__ranking > ul > li");
         const aboutProduction = document.querySelector(".article__about-film > ul");
         const detailParagraph = document.querySelector(".article__about-content > p");
+        const trailerButton = document.querySelector(".article__about-content > button");
         const listGeners = document.querySelector(".article__generosList");
 
 
@@ -115,9 +117,22 @@
             })
 
 
-        }
+        };
+        async function buttonVideo(watch, id, querySelector, event){
+            const res = await fetch(`https://api.themoviedb.org/3/${watch}/${id}/videos?api_key=${APIKEY}&language=es-MX`);
+            const data = await res.json();
+            const iframeContainer = event.target.nextElementSibling;
+           iframeContainer.setAttribute("open", "");
+           iframeContainer.children[0].setAttribute("src", `https://www.youtube.com/embed/${data?.results[1]?.key || data?.results[0]?.key }`);
+           console.log(data);
+           console.log(iframeContainer); 
+        };
+        
         crediActors(mediaType, idfilm, ".article__actors");
-
+            
+        trailerButton.addEventListener("click", (e) => {
+            buttonVideo(mediaType, idfilm, ".article__actors", e);
+        })
     </script>
 
 </body>

@@ -35,6 +35,7 @@ async function getTrending(watch, maininfo){
     const containerInfo = document.querySelector(maininfo);
     const movies = data?.results;
      console.log({data, movies}); 
+    containerInfo.innerHTML = "";
     movies.forEach(movie => {
         const cardMovie = document.createElement("movie-card");
         cardMovie.setAttribute("alt", `${movie?.title || movie?.name}`);
@@ -156,21 +157,6 @@ getCategoryPreviw("tv");
 getNewTrailers(".section__itemsnews-primary", 0, 3);
 getNewTrailers(".section__itemsnews-secondary", 3, 6);
 
-
-/* Capturar un evento delegado para obtener la imagen y título de cada card: */
-/*contentarticle.addEventListener("click", (e) => {
-    if (e.target.closest = "movie-card") {
-        const pictureUrl = e.target.attributes.src.textContent;
-        const pictureText = e.target.attributes.alt.textContent;
-        const idwatch = e.target.attributes.idmovie.textContent;
-        const mediaTypeFilm = e.target.attributes.media_type.textContent;
-        /* Usando sesión Storage para pasar estos valors guardados en el navegador y recuperarlos en el otro archivo */
-       /* sessionStorage.setItem('pictureUrl', pictureUrl); 
-        sessionStorage.setItem('pictureText', pictureText);
-        sessionStorage.setItem("idwatch", idwatch);
-        sessionStorage.setItem("media", mediaTypeFilm);
-    }
-});*/
 sectionMain.addEventListener("click", (e) => {
     if (e.target.closest = "movie-card") {
         const pictureUrl = e.target.attributes.src.textContent;

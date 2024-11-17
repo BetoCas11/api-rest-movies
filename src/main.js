@@ -123,9 +123,10 @@ async function getMoviebySearch(value, containerquery){
 
     data?.results.forEach(item => {
         const cardResultsearch = document.createElement("movie-card");
+        const imgURL = item?.poster_path || item?.profile_path ? `https://image.tmdb.org/t/p/w500${item?.poster_path || item?.profile_path}` : "https://dici.uta.cl/wp-content/uploads/2019/11/error404-300x192.png";
         cardResultsearch.setAttribute("alt", `${item?.title || item?.name}`);
-        cardResultsearch.setAttribute("src", `https://image.tmdb.org/t/p/w500${item?.poster_path}`);
-        cardResultsearch.setAttribute("date", `${item?.release_date || item.first_air_date}`);
+        cardResultsearch.setAttribute("src", imgURL);
+        cardResultsearch.setAttribute("date", `${item?.release_date || item.first_air_date || item?.original_name}`);
         cardResultsearch.setAttribute("idmovie", `${item?.id}`);
         cardResultsearch.setAttribute("media_type", `${item?.media_type}`);
         container.insertAdjacentElement("beforeend", cardResultsearch);

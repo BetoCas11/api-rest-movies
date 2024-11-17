@@ -7,7 +7,7 @@ class MovieCard extends HTMLElement{
         return /*html */`
         <figure media_type="${this.getAttribute("media_type")}">
             <a href="../content-Movie.html">
-            <img src="${this.getAttribute("src")}" alt="Poster película ${this.getAttribute("alt")}" idmovie="${this.getAttribute("idmovie")}">
+            <img src="${this.getAttribute("src")}" alt="Poster película ${this.getAttribute("alt")}" idmovie="${this.getAttribute("idmovie")}" loading="lazy">
             <figcaption>
                 <h3>${this.getAttribute("alt")}</h3>
                 <p>${this.getAttribute("date")}</p>
@@ -32,6 +32,7 @@ class MovieCard extends HTMLElement{
                     transition: scale 300ms ease,
                                 box-shadow 300ms ease;
                     cursor: pointer;
+                    content-visibility: auto;
                     &:hover{
                         scale: 1.1;
                         box-shadow: 0 0 40px var(--textnav-color);

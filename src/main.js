@@ -13,9 +13,12 @@ const mainhome = document.querySelector(".grid > .section-main > main");
 const contentarticle = document.querySelector(".section-main > main > .main__article");
 const navHomeitems = [...document.querySelectorAll(".header-nav > nav > .nav__list >:not(:nth-child(1), :nth-child(4))")];
 const navHomeSelect = document.querySelector(".header-nav > nav > .nav__list > .nav__item > select");
-const categorieslist = document.querySelector(".grid > .section-aside > aside > .aside__list");
+const listFavorites = document.querySelector(".grid > .section-aside > aside > .aside__prefers > li");
 const navinputSearch = document.querySelector(".header-nav > nav > form");
 const inputvalue = document.querySelector(".header-nav > nav > form > label > input[type=search]");
+const listlocalFavoritesAll = Object.values(localStorage);
+const listFavoritesMovies = listlocalFavoritesAll.filter(item => item.includes("Movie")).map(itemImg => itemImg.replace("Movie: ", ""));
+const listFavoritesTvShows = listlocalFavoritesAll.filter(item => item.includes("TV")).map(itemImg => itemImg.replace("TV: ", ""));
 
 /* Función para el header con img aleatorias: */
 async function getTrendingAllimg(watch, maininfo){
@@ -34,7 +37,6 @@ async function getTrending(watch, maininfo){
     const data = await res.json();
     const containerInfo = document.querySelector(maininfo);
     const movies = data?.results;
-     console.log({data, movies}); 
     containerInfo.innerHTML = "";
     movies.forEach(movie => {
         const cardMovie = document.createElement("movie-card");
@@ -55,21 +57,10 @@ async function getCategoryPreviw(watch){
     const groupOption = document.createElement("optgroup");
     groupOption.setAttribute("class", `${watch}`);
     groupOption.setAttribute("label", `${watch}`);
-    console.log(groupOption);
 
     const geners = data?.genres;
-    console.log(geners);
-    const usedGenres = new Set();
+    
 
-    for (let i = 0; i < categoriesItems.length; i++) {
-        let categotyRandom;
-        do {
-            categotyRandom = geners[Math.floor(Math.random() * geners.length)]?.name;
-        } while (usedGenres.has(categotyRandom));
-
-        usedGenres.add(categotyRandom);
-        categoriesItems[i].textContent = categotyRandom;
-    }
     geners.forEach(genre => {
         const option = document.createElement("option");
         navHomeSelect.insertAdjacentElement("beforeend", groupOption);
@@ -85,6 +76,7 @@ async function getAllCategories(watch, idgenre, containerCategory, ){
     const resultItems = data?.results;
     console.log(data?.results);
     const container = document.querySelector(containerCategory);
+    container.innerHTML = "";
     resultItems.forEach(item => {
         const categoryfilm = document.createElement("movie-card");
         categoryfilm.setAttribute("alt", `${item?.title || item?.name}`);
@@ -120,7 +112,7 @@ async function getMoviebySearch(value, containerquery){
     const res = await fetch(`${URLAPIBase}/search/multi?query=${value}&include_adult=true&api_key=${APIKEY}&language=es-MX&page=1`);
     const data =  await res.json();
     const container = document.querySelector(containerquery);
-
+    container.innerHTML = "";
     data?.results.forEach(item => {
         const cardResultsearch = document.createElement("movie-card");
         const imgURL = item?.poster_path || item?.profile_path ? `https://image.tmdb.org/t/p/w500${item?.poster_path || item?.profile_path}` : "https://dici.uta.cl/wp-content/uploads/2019/11/error404-300x192.png";
@@ -179,7 +171,28 @@ navHomeSelect.addEventListener("change", (e) => {
     sectionMain.insertAdjacentHTML("beforeend", /*html*/`<article class="categories">
         <div class="cancelbutton"></div>
         <h2>Resultados de la categoría: <span>${navHomeSelect.value}</span></h2>
-        <div class="resultscategory"></div>
+        <div class="resultscategory">
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+        </div>
         </article>`);
     const filmidCategory = navHomeSelect.selectedOptions[0].attributes[0].textContent;
     console.log(navHomeSelect.selectedOptions[0].attributes[0]);
@@ -203,7 +216,28 @@ navinputSearch.addEventListener("submit", (e) => {
         <article class="searchSection categories">
             <div class="cancelbutton"></div>
             <h2>Búsqueda relacionada con: <span>${inputvalue.value}</span></h2>
-            <section class="resultSearch resultscategory"></section>
+            <section class="resultSearch resultscategory">
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            <figure class="skeleton__container"><img></figure>
+            </section>
         </article>
     `);
     
@@ -221,5 +255,12 @@ navinputSearch.addEventListener("submit", (e) => {
        garbagearticle.forEach(item => item.remove());
     }
     
+});
+
+listFavoritesMovies.forEach(item => {
+    listFavorites.insertAdjacentHTML("beforeend", /*html */`<img src="${item}">`);
+});
+listFavoritesTvShows.forEach(item => {
+    listFavorites.nextElementSibling.insertAdjacentHTML("beforeend", /*html */`<img src="${item}">`);
 });
 

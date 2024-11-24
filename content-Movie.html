@@ -33,7 +33,7 @@
                     <figcaption class="figure__ranking">
                         <ul>
                             <li></li>
-                            <li>Ciencia Ficcón</li>
+                            <li></li>
                             <li></li>
                         </ul>
                     </figcaption>
@@ -70,12 +70,11 @@
         const taglineTitle = document.querySelector("header > span");
         const imgPoster = document.querySelector("figure > img");
         const imgranking = document.querySelectorAll(".article__containerimg > .figure__ranking > ul > li");
+        const imgaddFavorites = document.querySelector(".article__containerimg > .figure__ranking > ul > li:nth-child(2)");
         const aboutProduction = document.querySelector(".article__about-film > ul");
         const detailParagraph = document.querySelector(".article__about-content > p");
         const trailerButton = document.querySelector(".article__about-content > button");
         const listGeners = document.querySelector(".article__generosList");
-
-
 
         async function idFilmDeatails(watch, id){
             const res = await fetch(`https://api.themoviedb.org/3/${watch}/${id}?api_key=${APIKEY}&language=es-MX`);
@@ -132,7 +131,30 @@
             
         trailerButton.addEventListener("click", (e) => {
             buttonVideo(mediaType, idfilm, ".article__actors", e);
-        })
+        });
+        imgaddFavorites.addEventListener("click", (e)=> {
+            const buttonAnimation = e.target;
+            buttonAnimation.classList.toggle("addLocalStorage");
+            if (localStorage.getItem(`${idfilm}`)) {
+                //Podría poner la animación en el último valor, es decir que se quede en el último frame
+                
+                localStorage.removeItem(`${idfilm}`);
+            }
+            else{
+                if(mediaType == "movie"){
+                    localStorage.setItem(`${idfilm}`, `Movie: ${imgUrl}`);
+                } 
+                else if (mediaType == "tv"){ 
+                    localStorage.setItem(`${idfilm}`, `TV: ${imgUrl}`);
+                }
+            }
+        });
+       //Mejorar condicional: Solo funciona para las peliculas ya agregadas
+        if (imgUrl === localStorage.getItem(idfilm).replace("Movie: ", "")){
+            console.log("Ya está en favoritos");
+            /* imgaddFavorites.style.animation = "rotate 100ms ease forwards"; */
+        }
+
     </script>
 
 </body>

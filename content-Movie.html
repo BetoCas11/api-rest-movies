@@ -135,24 +135,12 @@
         imgaddFavorites.addEventListener("click", (e)=> {
             const buttonAnimation = e.target;
             buttonAnimation.classList.toggle("addLocalStorage");
-            if (localStorage.getItem(`${idfilm}`)) {
-                //Podría poner la animación en el último valor, es decir que se quede en el último frame
-                
-                localStorage.removeItem(`${idfilm}`);
-            }
-            else{
-                if(mediaType == "movie"){
-                    localStorage.setItem(`${idfilm}`, `Movie: ${imgUrl}`);
-                } 
-                else if (mediaType == "tv"){ 
-                    localStorage.setItem(`${idfilm}`, `TV: ${imgUrl}`);
-                }
-            }
-        });
-       //Mejorar condicional: Solo funciona para las peliculas ya agregadas
-        if (imgUrl === localStorage.getItem(idfilm).replace("Movie: ", "")){
+            localStorage.getItem(`${idfilm}`) ?  localStorage.removeItem(`${idfilm}`) : localStorage.setItem(`${idfilm}`, `${mediaType}: ${imgUrl}`);
+         });
+
+        if (imgUrl === localStorage.getItem(idfilm).replace(`${mediaType}: `, "")){
             console.log("Ya está en favoritos");
-            /* imgaddFavorites.style.animation = "rotate 100ms ease forwards"; */
+            imgaddFavorites.classList.toggle("addLocalStorage");
         }
 
     </script>

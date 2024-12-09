@@ -319,7 +319,6 @@ body{
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            row-gap: 10px;
             & h2{
                 font-size: 20px;
                 text-align: center;

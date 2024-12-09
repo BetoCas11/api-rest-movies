@@ -17,8 +17,8 @@ const listFavorites = document.querySelector(".grid > .section-aside > aside > .
 const navinputSearch = document.querySelector(".header-nav > nav > form");
 const inputvalue = document.querySelector(".header-nav > nav > form > label > input[type=search]");
 const listlocalFavoritesAll = Object.values(localStorage);
-const listFavoritesMovies = listlocalFavoritesAll.filter(item => item.includes("Movie")).map(itemImg => itemImg.replace("Movie: ", ""));
-const listFavoritesTvShows = listlocalFavoritesAll.filter(item => item.includes("TV")).map(itemImg => itemImg.replace("TV: ", ""));
+const listFavoritesMovies = listlocalFavoritesAll.filter(item => item.includes("movie")).map(itemImg => itemImg.replace("movie: ", ""));
+const listFavoritesTvShows = listlocalFavoritesAll.filter(item => item.includes("tv")).map(itemImg => itemImg.replace("tv: ", ""));
 
 /* Función para el header con img aleatorias: */
 async function getTrendingAllimg(watch, maininfo){
@@ -74,7 +74,6 @@ async function getAllCategories(watch, idgenre, containerCategory, ){
     const res =  await fetch(`${URLAPIBase}/discover/${watch}?include_adult=true&include_video=false&language=es-MX&page=1&sort_by=popularity.desc&with_genres=${idgenre}&api_key=${APIKEY}`);
     const data = await res.json();
     const resultItems = data?.results;
-    console.log(data?.results);
     const container = document.querySelector(containerCategory);
     container.innerHTML = "";
     resultItems.forEach(item => {
@@ -195,10 +194,8 @@ navHomeSelect.addEventListener("change", (e) => {
         </div>
         </article>`);
     const filmidCategory = navHomeSelect.selectedOptions[0].attributes[0].textContent;
-    console.log(navHomeSelect.selectedOptions[0].attributes[0]);
     navHomeitems.forEach(items => items.style.display = "none");
     navHomeSelect.style.display = "none";
-    console.log(e.target.selectedOptions[0]);
     if (e.target.selectedOptions[0].closest(".movie")){
         getAllCategories("movie", filmidCategory, ".categories > .resultscategory"); 
     } else{

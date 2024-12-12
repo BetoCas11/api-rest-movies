@@ -13,6 +13,8 @@ const mainhome = document.querySelector(".grid > .section-main > main");
 const contentarticle = document.querySelector(".section-main > main > .main__article");
 const navHomeitems = [...document.querySelectorAll(".header-nav > nav > .nav__list >:not(:nth-child(1), :nth-child(4))")];
 const navHomeSelect = document.querySelector(".header-nav > nav > .nav__list > .nav__item > select");
+const buttonProfile = document.querySelector(".header-nav > nav > .account");
+const profileSection = document.querySelector(".grid > .section-main > .profile");
 const listFavorites = document.querySelector(".grid > .section-aside > aside > .aside__prefers > li");
 const navinputSearch = document.querySelector(".header-nav > nav > form");
 const inputvalue = document.querySelector(".header-nav > nav > form > label > input[type=search]");
@@ -138,7 +140,6 @@ function delegateEvents(queyContainer){
     })
 }
 
-
 getTrending("movie", ".main__trendingMovies");
 getTrending("tv", ".main__tvShows");
 getTrendingAllimg("all", ".main__header > .main__img");
@@ -208,6 +209,7 @@ navHomeSelect.addEventListener("change", (e) => {
 
 navinputSearch.addEventListener("submit", (e) => {
     e.preventDefault();
+    window.scrollTo(0, 0);
     mainhome.classList.add("notshowmain");
     mainhome.insertAdjacentHTML("afterend", /*html*/`
         <article class="searchSection categories">
@@ -237,8 +239,9 @@ navinputSearch.addEventListener("submit", (e) => {
             </section>
         </article>
     `);
-    
     const containerSearch = document.querySelector(".grid > .section-main > .searchSection");
+    const articlegenres = [...document.querySelectorAll(".categories")];
+    articlegenres.length > 1 ? articlegenres[1].remove() : null;
     navHomeitems.forEach(items => items.style.display = "none");
     navHomeSelect.style.display = "none";
     /* navinputSearch.classList.add("notshowmain"); */
@@ -253,7 +256,10 @@ navinputSearch.addEventListener("submit", (e) => {
     }
     
 });
-
+buttonProfile.addEventListener("click", (e) => {
+    buttonProfile.classList.toggle("showProfile");
+    profileSection.classList.toggle("notshowmain");
+});
 listFavoritesMovies.forEach(item => {
     listFavorites.insertAdjacentHTML("beforeend", /*html */`<img src="${item}">`);
 });

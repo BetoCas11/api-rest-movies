@@ -26,11 +26,13 @@ body{
     & nav{
         inline-size: 100%;
         block-size: 55px;
+        padding-inline-end: 4px;
         background-color: var(--lightblack-color);
         outline: 1px solid var(--graycontorn);
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: fixed;
         @container headerNav (width <= 700px){
             justify-content: space-evenly;
         }
@@ -86,6 +88,9 @@ body{
                 border-radius: 20px;
                 overflow: hidden;
                 transition: transform 400ms ease;
+                @container headerNav (700px < width <= 815px){
+                    inline-size: 250px;
+                }
                 @container headerNav (width <= 540px){
                     inline-size: 200px;
                 }
@@ -119,8 +124,21 @@ body{
             }
         }
         & .account{
-            & img{
-                border-radius: 50%;
+            inline-size: 30px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 5px;
+            appearance: none;
+            background-color: transparent;
+            border: 0;
+            transition: transform 300ms ease;
+            cursor: pointer;
+            & > *{
+                inline-size: 90%;
+                block-size: 4px;
+                background-color: whitesmoke;
+                transition: transform 300ms ease;
+                transform-origin: left;
             }
         }
     }
@@ -134,6 +152,7 @@ body{
     grid-template-rows: 1fr;
     position: relative;
     view-transition-name: maingrid;
+    margin-block-start: 55px;
     & .section-main{
         grid-area: 1 / 2 / 2 / 3;
         @container sectionAside (width <= 900px){
@@ -181,6 +200,7 @@ body{
                     text-align: center;
                     margin-block-start: 20px;
                     position: relative;
+                    scroll-margin-top: 55px;
                     & a{
                         text-decoration: none;
                         color: inherit;
@@ -294,12 +314,48 @@ body{
                 flex-wrap: wrap;
                 justify-content: center;
                 padding: 20px;
-                gap: 10px 20px;
+                gap: 30px 10px;
             }
         }
         & .searchSection{
             .resultSearch{
                 background-color: var(--lightblack-color);
+            }
+        }
+        & section.profile {
+            inline-size: 40%;
+            block-size: 100vb;
+            position: fixed;
+            z-index: 2;
+            top: 0;
+            right: 0;
+            background-color: var(--lightblack-color);
+            animation: fade 400ms ease  forwards reverse;
+            @container sectionAside (width <= 650px){
+                inline-size: 80%;
+            }
+            & div{
+                inline-size: 100%;
+                block-size: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                & img{
+                    inline-size: 250px;
+                    block-size: 400px;
+                }
+                & p{
+                    color: white;
+                    font-size: 20px;
+                    & a{
+                        color: inherit;
+                        text-decoration: none;
+                        &:hover{
+                            text-decoration: underline var(--textnav-color);
+                        }
+                    }
+                }
             }
         }
     }
@@ -642,6 +698,17 @@ body{
     }
     &:nth-of-type(2n){
         animation-delay: .2s;
+    }
+}
+.showProfile{
+    & div:nth-child(1){
+        transform: rotate(45deg);
+    }
+    & div:nth-child(2){
+        transform: scale(0);
+    }
+    & div:nth-child(3){
+        transform: rotate(-45deg);
     }
 }
 

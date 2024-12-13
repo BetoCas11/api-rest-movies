@@ -45,7 +45,7 @@ body{
             padding-inline-start: 20px;
             margin: 0;
             @container headerNav (width <= 700px){
-                & .nav__item:not(:nth-child(1)){
+                & .nav__item:not(:nth-child(1), :nth-child(4)){
                     display: none;
                 }
             }
@@ -64,6 +64,10 @@ body{
                     border-radius: 10px;
                     inline-size: fit-content;
                     cursor: pointer;
+                    @container headerNav (width <= 700px){
+                        inline-size: 70px;
+
+                    }
                     & optgroup{
                         background-color: black;
                         text-align: center;
@@ -262,6 +266,29 @@ body{
                         animation-delay: .2s;
                     }
                 }
+                & #favorities{
+                    inline-size: 100%;
+                    background-color: var(--lightblack-color);
+                    @container sectionAside (width >= 900px){
+                        display: none;
+                    }
+                    & .aside__prefers{
+                        inline-size: 100%;
+                        margin-inline: auto;
+                        & li{
+                            list-style-type: none;
+                            display: grid;
+                            justify-items: center;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                            row-gap: 10px;
+                            inline-size: 100%;
+                            margin-block-end: 20px;
+                            & img{
+                                inline-size: 200px;
+                            }
+                        }
+                    }
+                }
             }
         }
         & .categories{
@@ -353,6 +380,12 @@ body{
                         text-decoration: none;
                         &:hover{
                             text-decoration: underline var(--textnav-color);
+                        }
+                    }
+                    &:last-child{
+                        display: none;
+                        @container sectionAside (width <= 900px){
+                            display: block;
                         }
                     }
                 }

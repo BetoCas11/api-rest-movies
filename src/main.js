@@ -16,12 +16,12 @@ const navHomeSelect = document.querySelector(".header-nav > nav > .nav__list > .
 const buttonProfile = document.querySelector(".header-nav > nav > .account");
 const profileSection = document.querySelector(".grid > .section-main > .profile");
 const listFavorites = document.querySelector(".grid > .section-aside > aside > .aside__prefers > li");
+const listFavoritesMobile = document.querySelector(".grid > .section-main > main > .main__article > aside#favorities > .aside__prefers");
 const navinputSearch = document.querySelector(".header-nav > nav > form");
 const inputvalue = document.querySelector(".header-nav > nav > form > label > input[type=search]");
 const listlocalFavoritesAll = Object.values(localStorage);
 const listFavoritesMovies = listlocalFavoritesAll.filter(item => item.includes("movie")).map(itemImg => itemImg.replace("movie: ", ""));
 const listFavoritesTvShows = listlocalFavoritesAll.filter(item => item.includes("tv")).map(itemImg => itemImg.replace("tv: ", ""));
-
 /* Función para el header con img aleatorias: */
 async function getTrendingAllimg(watch, maininfo){
     const res = await fetch(`${URLAPI}/${watch}/day?api_key=${APIKEY}&language=es-MX`);
@@ -262,8 +262,9 @@ buttonProfile.addEventListener("click", (e) => {
 });
 listFavoritesMovies.forEach(item => {
     listFavorites.insertAdjacentHTML("beforeend", /*html */`<img src="${item}">`);
+    listFavoritesMobile.children[0].insertAdjacentHTML("beforeend", /*html */`<img src="${item}">`);
 });
 listFavoritesTvShows.forEach(item => {
     listFavorites.nextElementSibling.insertAdjacentHTML("beforeend", /*html */`<img src="${item}">`);
+    listFavoritesMobile.children[1].insertAdjacentHTML("beforeend", /*html */`<img src="${item}">`);
 });
-

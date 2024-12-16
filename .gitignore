@@ -130,4 +130,3 @@ dist
 .pnp.*
 
 #La carpeta de la API key
-src/secret.js
